@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <DigitalClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="55sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:id="@+id/clock" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/clock"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="start"
+        android:id="@+id/btn_start" />
+
+    <Button
+        android:id="@+id/btn_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/clock"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/light_grey"
+        android:text="pause"
+        android:textColor="@color/black"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:layout_toEndOf="@id/btn_pause"
+        android:layout_below="@id/clock"
+        android:layout_marginStart="20dp"
+        android:text="Reset" />
+
+    <Button
+        android:id="@+id/btn_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_start"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp"
+        android:backgroundTint="@color/light_grey"
+        android:text="log time"
+        android:textColor="@color/black" />
+
+    <Spinner
+        android:id="@+id/spn_savedClients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_selectjob"
+        android:layout_marginBottom="35dp" />
+
+    <TextView
+        android:id="@+id/tv_selectclient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/spn_savedClients"
+        android:layout_marginStart="13dp"
+        android:text="Select Client" />
+
+    <Spinner
+        android:id="@+id/spn_savedJobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/clock"
+        android:layout_marginBottom="130dp" />
+
+    <TextView
+        android:id="@+id/tv_selectjob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/spn_savedJobs"
+        android:layout_marginStart="13dp"
+        android:text="Select Job" />
+
+    <Button
+        android:id="@+id/btn_clients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_log"
+        android:layout_marginTop="69dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="80dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/light_grey"
+        android:text="clients" />
+
+    <Button
+        android:id="@+id/btn_jobs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_log"
+        android:layout_marginTop="69dp"
+        android:layout_marginStart="80dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/light_grey"
+        android:text="jobs" />
+
+    <TextView
+        android:id="@+id/txt_onTheClock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/clock"
+        android:layout_marginBottom="80dp"
+        android:textSize="35sp"
+        android:textColor="@color/design_default_color_error"
+        android:visibility="invisible"
+        android:text="On the Clock" />
+
+    <TextView
+        android:id="@+id/txt_startTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/clock"
+        android:layout_marginBottom="40dp"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:text="Start time: " />
+
+</RelativeLayout>

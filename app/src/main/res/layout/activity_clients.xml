@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClientsActivity">
+
+    <Button
+        android:id="@+id/btn_addClient"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_above="@id/lstClients"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="22dp"
+        android:layout_toEndOf="@id/txt_clientName"
+        android:backgroundTint="@color/light_grey"
+        android:text="add client"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/txt_clientName"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/lstClients"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="22dp"
+        android:ems="10"
+        android:hint="Client Name"
+        android:inputType="textPersonName" />
+
+    <ListView
+        android:id="@+id/lstClients"
+        android:layout_width="match_parent"
+        android:layout_height="530dp"
+        android:layout_above="@id/btn_mainFromClients">
+    </ListView>
+
+    <Button
+        android:id="@+id/btn_mainFromClients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Back to Timer" />
+</RelativeLayout>

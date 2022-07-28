@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewClientActivity">
+
+    <TextView
+        android:id="@+id/lbl_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_clientName2"
+        android:layout_marginStart="15dp"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/tv_clientName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_addJob"
+        android:textSize="25sp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="45dp"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/txt_editName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_addJob"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="45dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/lbl_jobName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_addJob"
+        android:layout_marginStart="15dp"
+        android:text="Job Name" />
+
+    <EditText
+        android:id="@+id/txt_addJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lst_jobs"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="25dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Job Name" />
+
+    <ListView
+        android:id="@+id/lst_jobs"
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:layout_above="@id/btn_mainFromClient" />
+
+    <Button
+        android:id="@+id/btn_editClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_addJob2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/btn_saveClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_addJob2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="25dp"
+        android:visibility="invisible"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/btn_addJob2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lst_jobs"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Add Job" />
+
+    <Button
+        android:id="@+id/btn_mainFromClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Back to Timer" />
+
+</RelativeLayout>

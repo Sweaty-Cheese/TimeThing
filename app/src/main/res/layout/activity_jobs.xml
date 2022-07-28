@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".JobsActivity">
+
+    <Button
+        android:id="@+id/btn_addJob"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_above="@id/lstJobs"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="22dp"
+        android:layout_toEndOf="@id/txt_jobName"
+        android:backgroundTint="@color/light_grey"
+        android:text="add job"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/txt_jobName"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/lstJobs"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="22dp"
+        android:ems="10"
+        android:hint="Job Name"
+        android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/spn_clients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txt_jobName"
+        android:layout_marginBottom="25dp"/>
+
+    <ListView
+        android:id="@+id/lstJobs"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_above="@id/btn_mainFromJobs"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/spn_clients"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="15dp"
+        android:text="Client" />
+
+    <Button
+        android:id="@+id/btn_mainFromJobs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Back to Timer" />
+
+</RelativeLayout>

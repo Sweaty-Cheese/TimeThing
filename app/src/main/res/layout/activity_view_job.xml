@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewJobActivity">
+
+    <TextView
+        android:id="@+id/lbl_jobName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_above="@id/txt_editJobName"
+        android:text="Job Name" />
+
+    <EditText
+        android:id="@+id/txt_editJobName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/spn_changeClient"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="45dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/lbl_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/spn_changeClient"
+        android:layout_marginStart="15dp"
+        android:text="Client" />
+
+    <Spinner
+        android:id="@+id/spn_changeClient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/radgp_trueFalse"
+        android:visibility="invisible"
+        android:layout_marginBottom="60dp" />
+
+    <TextView
+        android:id="@+id/lbl_completed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/radgp_trueFalse"
+        android:layout_marginStart="15dp"
+        android:text="Completed?" />
+
+    <RadioGroup
+        android:id="@+id/radgp_trueFalse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/lstSessions"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="25dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rad_True"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:onClick="onRadioButtonClicked"/>
+
+        <RadioButton
+            android:id="@+id/rad_False"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:text="No"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+    <ListView
+        android:id="@+id/lstSessions"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_above="@id/btn_mainFromJob" />
+
+    <Button
+        android:id="@+id/btn_EditJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Edit Job" />
+
+    <Button
+        android:id="@+id/btn_SaveJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="25dp"
+        android:visibility="invisible"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Save Changes" />
+
+    <Button
+        android:id="@+id/btn_AddSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/lstSessions"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Add Session" />
+
+    <TextView
+        android:id="@+id/tv_JobName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lbl_jobName"
+        android:layout_marginStart="25dp"
+        android:textSize="25sp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tv_ClientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lbl_client"
+        android:layout_marginStart="25dp"
+        android:textSize="20sp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btn_mainFromJob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/black"
+        android:text="Back to Timer"/>
+</RelativeLayout>
