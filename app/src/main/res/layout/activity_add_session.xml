@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddSessionActivity">
+    tools:context=".Activity.AddSessionActivity">
 
   <TextView
       android:id="@+id/lbl_date"
@@ -18,37 +18,121 @@
       android:id="@+id/cal_dateSelect"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_above="@id/txt_duration"
+      android:layout_above="@id/txt_start_time"
       android:layout_marginBottom="25dp"/>
 
   <TextView
-      android:id="@+id/lbl_duration"
+      android:id="@+id/lbl_start_time"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_above="@id/txt_duration"
-      android:layout_marginStart="80dp"
-      android:text="Set Duration (hrs.)" />
+      android:layout_above="@id/txt_start_time"
+      android:layout_marginStart="55dp"
+      android:text="Start Time" />
 
   <EditText
-      android:id="@+id/txt_duration"
+      android:id="@+id/txt_start_time"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_above="@id/btn_addSession"
-      android:layout_marginStart="160dp"
+      android:layout_marginStart="30dp"
       android:layout_marginBottom="45dp"
       android:ems="2"
-      android:hint="99"
+      android:hint="12"
+      android:maxLength="2"
       android:inputType="number"
       android:textAlignment="textEnd" />
 
   <Spinner
-      android:id="@+id/spn_durationDecimal"
+      android:id="@+id/spn_start_time_mins"
       android:layout_width="90dp"
       android:layout_height="wrap_content"
       android:layout_above="@id/btn_addSession"
-      android:layout_toEndOf="@id/txt_duration"
+      android:layout_toEndOf="@id/txt_start_time"
       android:layout_marginBottom="56dp"
       android:entries="@array/duration_decimals"/>
+
+  <RadioGroup
+      android:id="@+id/radgp_start_amPm"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/lbl_start_time"
+      android:layout_marginTop="40dp"
+      android:layout_marginStart="25dp"
+      android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/rad_start_am"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AM"
+        android:onClick="onRadioButtonClicked"/>
+
+    <RadioButton
+        android:id="@+id/rad_start_pm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="PM"
+        android:onClick="onRadioButtonClicked"/>
+  </RadioGroup>
+
+  <TextView
+      android:id="@+id/lbl_finish_time"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@id/txt_finish_time"
+      android:layout_alignParentRight="true"
+      android:layout_marginEnd="55dp"
+      android:text="Finish Time" />
+
+  <EditText
+      android:id="@+id/txt_finish_time"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@id/btn_addSession"
+      android:layout_toStartOf="@id/spn_finish_time_mins"
+      android:layout_marginBottom="45dp"
+      android:ems="2"
+      android:hint="12"
+      android:maxLength="2"
+      android:inputType="number"
+      android:textAlignment="textEnd" />
+
+  <Spinner
+      android:id="@+id/spn_finish_time_mins"
+      android:layout_width="90dp"
+      android:layout_height="wrap_content"
+      android:layout_above="@id/btn_addSession"
+      android:layout_alignParentRight="true"
+      android:layout_marginEnd="30dp"
+      android:layout_marginBottom="56dp"
+      android:entries="@array/duration_decimals"/>
+
+  <RadioGroup
+      android:id="@+id/radgp_finish_amPm"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/lbl_start_time"
+      android:layout_alignParentRight="true"
+      android:layout_marginTop="40dp"
+      android:layout_marginEnd="25dp"
+      android:orientation="horizontal">
+
+    <RadioButton
+        android:id="@+id/rad_finish_am"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AM"
+        android:onClick="onRadioButtonClicked"/>
+
+    <RadioButton
+        android:id="@+id/rad_finish_pm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="PM"
+        android:onClick="onRadioButtonClicked"/>
+  </RadioGroup>
 
   <Button
       android:id="@+id/btn_addSession"

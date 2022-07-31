@@ -1,4 +1,4 @@
-package com.example.timething;
+package com.example.timething.Activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.timething.DbUtil;
+import com.example.timething.MainActivity;
+import com.example.timething.R;
 import com.example.timething.model.Client;
 
 import java.util.List;

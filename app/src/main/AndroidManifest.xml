@@ -16,23 +16,23 @@
         android:theme="@style/Theme.TimeThing"
         tools:targetApi="31" >
         <activity
-            android:name=".AddSessionActivity"
+            android:name=".Activity.AddSessionActivity"
             android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustNothing" />
         <activity
-            android:name=".ViewClientActivity"
+            android:name=".Activity.ViewClientActivity"
             android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustNothing" />
         <activity
-            android:name=".ViewJobActivity"
+            android:name=".Activity.ViewJobActivity"
             android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustNothing" />
         <activity
-            android:name=".JobsActivity"
+            android:name=".Activity.JobsActivity"
             android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustNothing" />
         <activity
-            android:name=".ClientsActivity"
+            android:name=".Activity.ClientsActivity"
             android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustNothing" />
         <activity

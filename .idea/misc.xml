@@ -9,10 +9,12 @@
         <entry key="..\:/TimeThing/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/TimeThing/app/src/main/res/layout/activity_view_client.xml" value="0.33" />
         <entry key="..\:/TimeThing/app/src/main/res/layout/activity_view_job.xml" value="0.5" />
+        <entry key="..\:/Users/moop6/AndroidStudioProjects/TimeThing/app/src/main/res/layout/activity_add_session.xml" value="0.3625" />
+        <entry key="..\:/Users/moop6/AndroidStudioProjects/TimeThing/app/src/main/res/layout/activity_view_job.xml" value="0.5" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -5,16 +5,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.example.timething.model.Client;
 import com.example.timething.model.Job;
 import com.example.timething.model.Session;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class DbUtil extends SQLiteOpenHelper {
     public static final String client_table = "client_table";
     public static final String client_id = "client_id";
@@ -30,10 +36,15 @@ public class DbUtil extends SQLiteOpenHelper {
     public static final String session_id = "session_id";
     public static final String session_duration = "session_duration";
     public static final String session_date = "session_date";
+    public static final String session_start = "session_start";
+    public static final String session_end = "session_end";
     //job_id
 
     final int TRUE = 1;
     final int FALSE = 0;
+
+    private final DateTimeFormatter dtfHrsMins = DateTimeFormatter.ofPattern("hh:mm A");
+    private final DateTimeFormatter dtfMmmDdYyy = DateTimeFormatter.ofPattern("MMM/dd/yyy");
 
     public DbUtil(@Nullable Context context) {
         super(context,  "jobs.db", null, 1);
@@ -59,6 +70,8 @@ public class DbUtil extends SQLiteOpenHelper {
                 session_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 session_duration + " REAL," +
                 session_date + " TEXT," +
+                session_start + " TEXT," +
+                session_end + " TEXT," +
                 job_id + " INTEGER," +
                 "FOREIGN KEY (" + job_id + ")" +
                     "REFERENCES " + job_table + "(" + job_id + "))";
@@ -303,10 +316,19 @@ public class DbUtil extends SQLiteOpenHelper {
     public void AddSession(Session session) {
         SQLiteDatabase db = this.getWritableDatabase();
 
+        long timeWorkedInMillis = Duration.between(ClockBackground.startTime, LocalDateTime.now()).toMillis();//TODO: get java dividing properly on ln112 and get pause time working
+        timeWorkedInMillis -= ClockBackground.pauseDuration;    //Subtract pauseDuration, default 0
+        double timeWorkedInHours = timeWorkedInMillis / (double) 3600000;       //Millis / 3600000 = Hours
+        timeWorkedInHours = Math.round(timeWorkedInHours * 4.0) / 4.0;    //Round hours to nearest quarter hour
+
+        session.setDuration(timeWorkedInHours);
+
         ContentValues cv = new ContentValues();
 
         cv.put(session_duration, session.getDuration());
-        cv.put(session_date, session.getDate());
+        cv.put(session_date, session.getDate().toString());
+        cv.put(session_start, session.getStartTime().toString());
+        cv.put(session_end, session.getFinishTime().toString());
         cv.put(job_id, String.valueOf(session.getJob_id()));
 
         db.insert(session_table, null, cv);
@@ -324,7 +346,13 @@ public class DbUtil extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             Session sesh;
             do {            //              session_id                duration                    date                job_id
-                sesh = new Session (cursor.getInt(0), cursor.getFloat(1), cursor.getString(2), cursor.getInt(3));
+                int id1 = cursor.getInt(0);
+                double duration = cursor.getDouble(1);
+                String date = cursor.getString(2);
+                String startTime = cursor.getString(3);
+                String finishTime = cursor.getString(4);
+                int jobId = cursor.getInt(5);
+                sesh = new Session (id1, duration, LocalDateTime.parse(date, dtfMmmDdYyy), LocalDateTime.parse(startTime, dtfHrsMins), LocalDateTime.parse(finishTime, dtfHrsMins), jobId);
                 lstSeshs.add(sesh);
             } while (cursor.moveToNext());
         }

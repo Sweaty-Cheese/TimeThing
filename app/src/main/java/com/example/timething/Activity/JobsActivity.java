@@ -1,4 +1,4 @@
-package com.example.timething;
+package com.example.timething.Activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timething.DbUtil;
+import com.example.timething.MainActivity;
+import com.example.timething.R;
 import com.example.timething.model.Client;
 import com.example.timething.model.Job;
 
@@ -27,6 +30,8 @@ public class JobsActivity extends AppCompatActivity {
     Button btnAddJob;
 
     Button btnTimer;
+
+    private final int FALSE = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -60,7 +65,7 @@ public class JobsActivity extends AppCompatActivity {
             else {
                 DbUtil db = new DbUtil(JobsActivity.this);
                 Client client = (Client) spnClients.getSelectedItem();
-                Job job = new Job(txtJobName.getText().toString(), client.getId(), db.FALSE);
+                Job job = new Job(txtJobName.getText().toString(), client.getId(), FALSE);
 
                 db.AddJob(job);
                 RefreshJobList();

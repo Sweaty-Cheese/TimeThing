@@ -1,4 +1,4 @@
-package com.example.timething;
+package com.example.timething.Activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -13,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.timething.DbUtil;
+import com.example.timething.MainActivity;
+import com.example.timething.R;
 import com.example.timething.model.Client;
 import com.example.timething.model.Job;
 
@@ -34,6 +37,8 @@ public class ViewClientActivity extends AppCompatActivity {
     ListView lstJobs;
 
     int clientId;
+
+    private final int FALSE = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -97,7 +102,7 @@ public class ViewClientActivity extends AppCompatActivity {
                 Toast.makeText(ViewClientActivity.this, "Name cannot be empty", Toast.LENGTH_LONG).show();
             }
             else {
-                Job job = new Job(txtAddJob.getText().toString(), clientId, db.FALSE);
+                Job job = new Job(txtAddJob.getText().toString(), clientId, FALSE);
 
                 db.AddJob(job);
 

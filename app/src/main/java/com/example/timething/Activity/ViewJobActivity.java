@@ -1,4 +1,4 @@
-package com.example.timething;
+package com.example.timething.Activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -16,12 +16,16 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.timething.DbUtil;
+import com.example.timething.MainActivity;
+import com.example.timething.R;
 import com.example.timething.model.Client;
 import com.example.timething.model.Job;
 import com.example.timething.model.Session;
 
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ViewJobActivity extends AppCompatActivity {
 
     TextView txtJobName;
@@ -47,7 +51,9 @@ public class ViewJobActivity extends AppCompatActivity {
 
     int jobId;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    private final int TRUE = 1;
+    private final int FALSE = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +93,7 @@ public class ViewJobActivity extends AppCompatActivity {
         txtClientName.setText(client.getName());
         RefreshClientSpinner(client);
 
-        if (job.isJob_completed() == db.TRUE) {
+        if (job.isJob_completed() == TRUE) {
             radTrue.setChecked(true);
             radFalse.setChecked(false);
         }
@@ -120,9 +126,9 @@ public class ViewJobActivity extends AppCompatActivity {
                 job.setClient_id(newClient.getId());
 
                 if (radTrue.isChecked())
-                    job.setJob_completed(db.TRUE);
+                    job.setJob_completed(TRUE);
                 else
-                    job.setJob_completed(db.FALSE);
+                    job.setJob_completed(FALSE);
 
                 db.UpdateJob(job);
 
@@ -181,12 +187,12 @@ public class ViewJobActivity extends AppCompatActivity {
         // Check which radio button was clicked
         if (!inEditMode && checked) {
             if (view.getId() == radTrue.getId()) {
-                job.setJob_completed(db.TRUE);
+                job.setJob_completed(TRUE);
                 db.UpdateJob(job);
 
                 Toast.makeText(ViewJobActivity.this, "Job saved as completed", Toast.LENGTH_LONG).show();
             } else if (view.getId() == radFalse.getId()) {
-                job.setJob_completed(db.FALSE);
+                job.setJob_completed(FALSE);
                 db.UpdateJob(job);
 
                 Toast.makeText(ViewJobActivity.this, "Job saved as incomplete", Toast.LENGTH_LONG).show();

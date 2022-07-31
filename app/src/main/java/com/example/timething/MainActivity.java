@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.timething.Activity.ClientsActivity;
+import com.example.timething.Activity.JobsActivity;
 import com.example.timething.model.Client;
 import com.example.timething.model.Job;
 import com.example.timething.model.Session;
@@ -36,9 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtStartTime;
 
     private boolean timerRunning = false;
-    private double timeWorkedInHours;
 
-    private final DateTimeFormatter dtfHrsMins = DateTimeFormatter.ofPattern("HH:mm");
+    private final DateTimeFormatter dtfHrsMins = DateTimeFormatter.ofPattern("hh:mm a");
     private final DateTimeFormatter dtfMmmDdYyy = DateTimeFormatter.ofPattern("MMM/dd/yyy");
 
     private final double ROUND_FACTOR = 4.0;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     txtStartTime.setVisibility(View.VISIBLE);
                 }
                 else
-                    ClockBackground.timeAway += Duration.between(ClockBackground.pauseTime, LocalDateTime.now()).toMillis();
+                    ClockBackground.pauseDuration += Duration.between(ClockBackground.pauseTime, LocalDateTime.now()).toMillis();
 
                 StartTimer();
             }
@@ -105,31 +106,30 @@ public class MainActivity extends AppCompatActivity {
                 Job job = (Job) spnSavedJobs.getSelectedItem();
                 LocalDateTime now = LocalDateTime.now();
 
-                //Determine timeWorkedInHours and round to nearest quarter hour
-                timeWorkedInHours = Duration.between(ClockBackground.startTime, now).toMillis() - ClockBackground.timeAway;
-                timeWorkedInHours = Math.round(timeWorkedInHours * ROUND_FACTOR) / ROUND_FACTOR;
+//                //Determine timeWorkedInMillis
+//                long timeWorkedInMillis = Duration.between(ClockBackground.startTime, now).toMillis();//TODO: get java dividing properly on ln112 and get pause time working
+//                timeWorkedInMillis -= ClockBackground.pauseDuration;    //Subtract pauseDuration, default 0
+//                double timeWorkedInHours = (long)((float) timeWorkedInMillis / 3600000);       //Millis / 3600000 = Hours
+//                timeWorkedInHours = Math.round(timeWorkedInHours * ROUND_FACTOR) / ROUND_FACTOR;    //Round hours to nearest quarter hour
 
-                Session sesh = new Session(timeWorkedInHours, dtfMmmDdYyy.format(LocalDateTime.now()), job.getId());
+                Session sesh = new Session(LocalDateTime.now(), ClockBackground.startTime, LocalDateTime.now(), job.getId());
 
                 db.AddSession(sesh);
-                Toast.makeText(MainActivity.this, "Session logged to " + job.getName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, sesh.getDuration() + "hrs. logged to " + job.getName(), Toast.LENGTH_LONG).show();
                 ResetTimer();
             }
         });
 
-        //Takes the user to the Clients page
         btnClients.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, ClientsActivity.class);
             startActivity(i);
         });
 
-        //Takes the user to the Jobs page
         btnJobs.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, JobsActivity.class);
             startActivity(i);
         });
 
-        //Calls RefreshJobSpinner()
         spnSavedClients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
         timerRunning = ClockBackground.clockRunning;
 
-        if (ClockBackground.pauseTime != null)
+        if (ClockBackground.pauseTime != null && timerRunning)
             ClockBackground.timeAway = Duration.between(ClockBackground.pauseTime, LocalDateTime.now()).toMillis();
 
         if (ClockBackground.startTime != null) {
@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         ClockBackground.pauseTime = null;
         ClockBackground.startTime = null;
         ClockBackground.timeAway = 0;
+        ClockBackground.pauseDuration = 0;
         ClockBackground.clockRunning = false;
     }
 }
