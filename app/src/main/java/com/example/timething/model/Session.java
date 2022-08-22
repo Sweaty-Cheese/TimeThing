@@ -4,22 +4,24 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Session {
     private int id;
     private double duration;
-    private final LocalDateTime date;
+    private final LocalDate date;
     private final int job_id;
-    private final LocalDateTime startTime;
-    private final LocalDateTime finishTime;
+    private final LocalTime startTime;
+    private final LocalTime finishTime;
 
     public Session (int id,
                     double duration,
-                    LocalDateTime date,
-                    LocalDateTime startTime,
-                    LocalDateTime finishTime,
+                    LocalDate date,
+                    LocalTime startTime,
+                    LocalTime finishTime,
                     int job_id) {
         this.id = id;
         this.duration = duration;
@@ -31,9 +33,9 @@ public class Session {
 
     public Session (
                     double duration,
-                    LocalDateTime date,
-                    LocalDateTime startTime,
-                    LocalDateTime finishTime,
+                    LocalDate date,
+                    LocalTime startTime,
+                    LocalTime finishTime,
                     int job_id) {
         this.duration = duration;
         this.date = date;
@@ -43,9 +45,9 @@ public class Session {
     }
 
     public Session (
-            LocalDateTime date,
-            LocalDateTime startTime,
-            LocalDateTime finishTime,
+            LocalDate date,
+            LocalTime startTime,
+            LocalTime finishTime,
             int job_id) {
         this.date = date;
         this.startTime = startTime;
@@ -64,13 +66,13 @@ public class Session {
     }
     public void setDuration(double duration) { this.duration = duration; }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public LocalDateTime getStartTime() { return startTime; }
+    public LocalTime getStartTime() { return startTime; }
 
-    public LocalDateTime getFinishTime() { return finishTime; }
+    public LocalTime getFinishTime() { return finishTime; }
 
     public int getJob_id() {
         return job_id;

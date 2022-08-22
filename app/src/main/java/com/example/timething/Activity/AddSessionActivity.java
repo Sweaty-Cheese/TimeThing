@@ -3,6 +3,7 @@ package com.example.timething.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.RadioButton;
@@ -16,11 +17,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.timething.DbUtil;
 import com.example.timething.R;
+import com.example.timething.model.Job;
 import com.example.timething.model.Session;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
@@ -46,10 +50,10 @@ public class AddSessionActivity extends AppCompatActivity {
     Button btnAdd;
     Button btnBack;
 
-    SimpleDateFormat sdfMMMDddYyy = new SimpleDateFormat("MMM/dd/yyy");
+    final DateTimeFormatter dtfMMMDddYyy = DateTimeFormatter.ofPattern("MMM/dd/yyy");
     private final DateTimeFormatter dtfHrsMins = DateTimeFormatter.ofPattern("hh:mm a");
 
-
+    String selectedDate = LocalDate.now().toString();
     int jobId;
 
     @Override
@@ -86,7 +90,7 @@ public class AddSessionActivity extends AppCompatActivity {
             if (txtStartHour.getText().toString().equals("") && txtFinishHour.getText().toString().equals("")) {
                 Toast.makeText(AddSessionActivity.this, "Please specify a start time and a finish time", Toast.LENGTH_LONG).show();
             }
-            else if (txtStartHour.getText().toString().equals("")) {
+            else if (txtStartHour.getText().toString().equals("") ) {
                 Toast.makeText(AddSessionActivity.this, "Please specify a start time", Toast.LENGTH_LONG).show();
             }
             else if (txtFinishHour.getText().toString().equals("")) {
@@ -100,23 +104,20 @@ public class AddSessionActivity extends AppCompatActivity {
                     String startAmPm = "";
                     String finishAmPm = "";
 
-                    if (radStartAm.isChecked())
-                        startAmPm = " a.m.";
-                    else if (radStartPm.isChecked())
-                        startAmPm = " a.m.";
+                    if (radStartPm.isChecked())
+                        startHour += 12;
 
-                    if (radFinishAm.isChecked())
-                        finishAmPm = " a.m.";
-                    else if (radFinishPm.isChecked())
-                        finishAmPm = " a.m.";
 
-                    String startTimeString = startHour + spnStartMin.getSelectedItem().toString() + startAmPm;
-                    String finishTimeString = finishHour + spnFinishMin.getSelectedItem().toString() + finishAmPm;
+                    if (radFinishPm.isChecked())
+                        finishHour += 12;
 
-                    LocalDateTime startTime = LocalDateTime.parse(startTimeString, dtfHrsMins);
-                    LocalDateTime finishTime = LocalDateTime.parse(finishTimeString, dtfHrsMins);
+                    String startTimeString = startHour + spnStartMin.getSelectedItem().toString();
+                    String finishTimeString = finishHour + spnFinishMin.getSelectedItem().toString();
 
-                    Session sesh = new Session(LocalDateTime.ofInstant(Instant.ofEpochMilli(calSessionDate.getDate()), TimeZone.getDefault().toZoneId()), startTime, finishTime, jobId);
+                    LocalTime startTime = LocalTime.parse(startTimeString);
+                    LocalTime finishTime = LocalTime.parse(finishTimeString);
+
+                    Session sesh = new Session(LocalDate.parse(selectedDate), startTime, finishTime, jobId);
                     db.AddSession(sesh);
 
                     Toast.makeText(AddSessionActivity.this, "Session added successfully", Toast.LENGTH_LONG).show();
@@ -134,5 +135,34 @@ public class AddSessionActivity extends AppCompatActivity {
 
             startActivity(i);
         });
+
+        calSessionDate.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                selectedDate = month + "-" + dayOfMonth + "-" + year;
+            }
+        });
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        DbUtil db = new DbUtil(AddSessionActivity.this);
+
+        Session sesh;
+        // Check which radio button was clicked
+        if (checked) {
+            if (view.getId() == radStartAm.getId()) {
+
+            } else if (view.getId() == radStartPm.getId()) {
+
+            } else if (view.getId() == radFinishAm.getId()) {
+
+            } else if (view.getId() == radFinishPm.getId()) {
+
+            }
+        }
     }
 }

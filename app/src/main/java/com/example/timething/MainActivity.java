@@ -21,7 +21,9 @@ import com.example.timething.model.Job;
 import com.example.timething.model.Session;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(view -> {
             if (!timerRunning) {
                 if (ClockBackground.startTime == null) {
-                    ClockBackground.startTime = LocalDateTime.now();
+                    ClockBackground.startTime = LocalTime.now();
                     txtStartTime.setText(getString(R.string.start_time, LocalDateTime.now().format(dtfHrsMins)));
                     txtStartTime.setVisibility(View.VISIBLE);
                 }
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 //                double timeWorkedInHours = (long)((float) timeWorkedInMillis / 3600000);       //Millis / 3600000 = Hours
 //                timeWorkedInHours = Math.round(timeWorkedInHours * ROUND_FACTOR) / ROUND_FACTOR;    //Round hours to nearest quarter hour
 
-                Session sesh = new Session(LocalDateTime.now(), ClockBackground.startTime, LocalDateTime.now(), job.getId());
+                Session sesh = new Session(LocalDate.now(), ClockBackground.startTime, LocalTime.now(), job.getId());
 
                 db.AddSession(sesh);
                 Toast.makeText(MainActivity.this, sesh.getDuration() + "hrs. logged to " + job.getName(), Toast.LENGTH_LONG).show();
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         ClockBackground.clockRunning = timerRunning;
 
         if (timerRunning)
-            ClockBackground.pauseTime = LocalDateTime.now();
+            ClockBackground.pauseTime = LocalTime.now();
     }
 
     @Override
@@ -205,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void StopTimer() {
-        ClockBackground.pauseTime = LocalDateTime.now();
+        ClockBackground.pauseTime = LocalTime.now();
 
         btnPause.setVisibility(View.INVISIBLE);
         btnStart.setVisibility(View.VISIBLE);

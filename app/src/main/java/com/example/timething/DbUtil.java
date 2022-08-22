@@ -15,7 +15,9 @@ import com.example.timething.model.Job;
 import com.example.timething.model.Session;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +45,8 @@ public class DbUtil extends SQLiteOpenHelper {
     final int TRUE = 1;
     final int FALSE = 0;
 
-    private final DateTimeFormatter dtfHrsMins = DateTimeFormatter.ofPattern("hh:mm A");
-    private final DateTimeFormatter dtfMmmDdYyy = DateTimeFormatter.ofPattern("MMM/dd/yyy");
+    private final DateTimeFormatter dtfHrsMins = DateTimeFormatter.ofPattern("H:mm a");
+    private final DateTimeFormatter dtfMmmDdYyy = DateTimeFormatter.ofPattern("d-MM-yyyy");
 
     public DbUtil(@Nullable Context context) {
         super(context,  "jobs.db", null, 1);
@@ -352,7 +354,7 @@ public class DbUtil extends SQLiteOpenHelper {
                 String startTime = cursor.getString(3);
                 String finishTime = cursor.getString(4);
                 int jobId = cursor.getInt(5);
-                sesh = new Session (id1, duration, LocalDateTime.parse(date, dtfMmmDdYyy), LocalDateTime.parse(startTime, dtfHrsMins), LocalDateTime.parse(finishTime, dtfHrsMins), jobId);
+                sesh = new Session (id1, duration, LocalDate.parse(date), LocalTime.parse(startTime), LocalTime.parse(finishTime), jobId);
                 lstSeshs.add(sesh);
             } while (cursor.moveToNext());
         }
